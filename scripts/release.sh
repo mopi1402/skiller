@@ -61,8 +61,15 @@ fi
 [ "$answer" = "$VERSION" ] || fail "confirmation did not match ($answer != $VERSION). Aborted, nothing published."
 
 # 5. Publish. prepack (in the package) copies the README and rebuilds.
+#    When the account enforces 2FA, pass the one-time code as the second
+#    argument: pnpm release <version> <otp>.
+OTP="${2:-}"
 info "publishing"
-( cd "$PKG_DIR" && npm publish )
+if [ -n "$OTP" ]; then
+  ( cd "$PKG_DIR" && npm publish --otp="$OTP" )
+else
+  ( cd "$PKG_DIR" && npm publish )
+fi
 
 # 6. Push the version commit and its tag, if a remote is configured.
 if git remote | grep -q .; then
