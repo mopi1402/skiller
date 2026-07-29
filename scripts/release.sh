@@ -46,8 +46,18 @@ NAME="$(node -p "require('$PKG_DIR/package.json').name")"
 info "dry-run of the tarball"
 ( cd "$PKG_DIR" && npm publish --dry-run )
 
-printf '\033[33mAbout to publish %s@%s to npm. Type the version to confirm: \033[0m' "$NAME" "$VERSION"
-read -r answer
+# Confirmation. Pass the version as an argument (pnpm release 0.1.0) for a
+# non-interactive run; otherwise prompt when a terminal is attached. A non-TTY
+# run with no argument fails loudly rather than publishing unconfirmed.
+answer="${1:-}"
+if [ -z "$answer" ]; then
+  if [ -t 0 ]; then
+    printf '\033[33mAbout to publish %s@%s to npm. Type the version to confirm: \033[0m' "$NAME" "$VERSION"
+    read -r answer
+  else
+    fail "no terminal to confirm on. Re-run as: pnpm release $VERSION"
+  fi
+fi
 [ "$answer" = "$VERSION" ] || fail "confirmation did not match ($answer != $VERSION). Aborted, nothing published."
 
 # 5. Publish. prepack (in the package) copies the README and rebuilds.
