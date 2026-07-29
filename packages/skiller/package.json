@@ -1,0 +1,57 @@
+{
+  "name": "@tayomi/skiller",
+  "version": "0.1.0",
+  "description": "A compiler for agent skills: build the file that ships from sources you maintain, instead of hand-writing every copy. v1 strips author-only comments; composable blocks with slots are next.",
+  "type": "module",
+  "packageManager": "pnpm@10.4.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mopi1402/skiller.git",
+    "directory": "packages/skiller"
+  },
+  "homepage": "https://github.com/mopi1402/skiller#readme",
+  "bugs": "https://github.com/mopi1402/skiller/issues",
+  "publishConfig": {
+    "access": "public"
+  },
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "bin": {
+    "skiller": "./dist/cli.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "prepack": "cp ../../README.md README.md && tsc -p tsconfig.build.json",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "keywords": [
+    "agent-skills",
+    "skills",
+    "compiler",
+    "partials",
+    "templating",
+    "markdown",
+    "mdast",
+    "claude-code"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "mdast-util-from-markdown": "^2.0.3",
+    "mdast-util-frontmatter": "^2.0.1",
+    "micromark-extension-frontmatter": "^2.0.0"
+  },
+  "devDependencies": {
+    "@types/mdast": "^4.0.4",
+    "@types/node": "^22.20.1",
+    "typescript": "^7.0.2",
+    "vitest": "^4.1.10"
+  }
+}

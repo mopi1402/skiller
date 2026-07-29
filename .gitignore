@@ -1,0 +1,9 @@
+node_modules/
+dist/
+tmp/
+.DS_Store
+.tayomi/state/
+
+# Copied from the root README at pack time, so the npm page is served without a
+# second file to maintain. Never edit this copy.
+packages/skiller/README.md

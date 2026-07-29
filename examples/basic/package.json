@@ -1,0 +1,12 @@
+{
+  "name": "example-basic",
+  "private": true,
+  "type": "module",
+  "description": "Consumes skiller the way a real project does: through the published command.",
+  "scripts": {
+    "build:skills": "skiller"
+  },
+  "devDependencies": {
+    "@tayomi/skiller": "workspace:*"
+  }
+}

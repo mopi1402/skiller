@@ -1,0 +1,8 @@
+{
+  "builds": [
+    { 
+      "src": "skills-src", 
+      "dist": "skills" 
+    }
+  ]
+}
